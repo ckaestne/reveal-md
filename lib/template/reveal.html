@@ -12,7 +12,7 @@
     <meta property="og:url" content="{{{absoluteUrl}}}" />
     {{/absoluteUrl}}
     <link rel="stylesheet" href="{{{base}}}/css/reveal.css" />
-    <link rel="stylesheet" href="{{{base}}}/{{{themeUrl}}}" id="theme" />
+    <link rel="stylesheet" href="{{{themeUrl}}}" id="theme" />
     <link rel="stylesheet" href="{{{base}}}{{{highlightThemeUrl}}}" />
     <link rel="stylesheet" href="{{{base}}}/css/print/{{#print}}pdf{{/print}}{{^print}}paper{{/print}}.css" type="text/css" media="print" />
     {{#cssPaths}}
@@ -48,7 +48,6 @@
 
       // Optional libraries used to extend on reveal.js
       var deps = [
-        { src: '{{{base}}}/lib/js/classList.js', condition: function() { return !document.body.classList; } },
         { src: '{{{base}}}/plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
         { src: '{{{base}}}/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
         { src: '{{{base}}}/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },

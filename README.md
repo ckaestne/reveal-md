@@ -14,12 +14,19 @@ npm install -g reveal-md
 reveal-md path/to/my/slides.md
 ```
 
-This starts a local server and opens any Markdown file as a reveal.js presentation in the default browser. Remote
-resources are also possible:
+This starts a local server and opens any Markdown file as a reveal.js presentation in the default browser.
+
+## Docker
+
+You can use Docker to run this tool without needing Node.js installed on your machine. Run the public Docker image,
+providing your markdown slides as a volume. A few examples:
 
 ```bash
-reveal-md https://raw.githubusercontent.com/webpro/reveal-md/master/demo/a.md
+docker run --rm -p 1948:1948 -v <path-to-your-slides>:/slides webpronl/reveal-md:latest
+docker run --rm -p 1948:1948 -v <path-to-your-slides>:/slides webpronl/reveal-md:latest --help
 ```
+
+The service is now running at [http://localhost:1948](http://localhost:1948).
 
 ## Features
 
@@ -35,6 +42,7 @@ reveal-md https://raw.githubusercontent.com/webpro/reveal-md/master/demo/a.md
 - [Live Reload](#live-reload)
 - [Custom Scripts](#custom-scripts)
 - [Custom CSS](#custom-css)
+- [Custom Favicon](#custom-favicon)
 - [Pre-process Markdown](#pre-process-markdown)
 - [Print to PDF](#print-to-pdf)
 - [Static Website](#static-website)
@@ -196,6 +204,8 @@ Inject custom scripts into the page:
 reveal-md slides.md --scripts script.js,another-script.js
 ```
 
+Don't use absolute paths, files should be in adjacent or descending folders.
+
 ### Custom CSS
 
 Inject custom CSS into the page:
@@ -203,6 +213,13 @@ Inject custom CSS into the page:
 ```bash
 reveal-md slides.md --css style.css,another-style.css
 ```
+
+Don't use absolute paths, files should be in adjacent or descending folders.
+
+### Custom Favicon
+
+If the directory with the markdown files contains a `favicon.ico` file, it will automatically be used as a favicon
+instead of the [default favicon](lib/favicon.ico).
 
 ### Pre-process Markdown
 
@@ -244,8 +261,24 @@ Create a (printable) PDF from the provided Markdown file:
 reveal-md slides.md --print slides.pdf
 ```
 
-Alternatively, append `?print-pdf` to the url from the command-line or in the browser (make sure to remove the `#/` or
-`#/1` hash). Then print the slides using the browser's (not the native) print dialog. This seems to work in Chrome.
+The PDF is generated using Puppeteer. Alternatively, append `?print-pdf` to the url from the command-line or in the
+browser (make sure to remove the `#/` or `#/1` hash). Then print the slides using the browser's (not the native) print
+dialog. This seems to work in Chrome.
+
+By default, paper size is set to match options in your [`reveal.json`](#revealjs-options) file, falling back to a
+default value 960x700 pixels. To override this behaviour, you can pass custom dimensions or format in a command line
+option `--print-size`:
+
+```bash
+reveal-md slides.md --print slides.pdf --print-size 1024x768   # in pixels when no unit is given
+reveal-md slides.md --print slides.pdf --print-size 210x297mm  # valid units are: px, in, cm, mm
+reveal-md slides.md --print slides.pdf --print-size A4         # valid formats are: A0-6, Letter, Legal, Tabloid, Ledger
+```
+
+In case of an error, please try the following:
+
+- Analyze debug output, e.g. `DEBUG=reveal-md reveal-md slides.md --print`
+- See `reveal-md help` for Puppeteer arguments (`puppeteer-launch-args` and `puppeteer-chromium-executable`)
 
 ### Static Website
 

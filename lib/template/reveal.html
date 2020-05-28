@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{{themeUrl}}}" id="theme" />
     <link rel="stylesheet" href="{{{base}}}{{{highlightThemeUrl}}}" />
     <link rel="stylesheet" href="{{{base}}}/css/print/{{#print}}pdf{{/print}}{{^print}}paper{{/print}}.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     {{#cssPaths}}
     <link rel="stylesheet" href="{{{base}}}/{{{.}}}" />
     {{/cssPaths}}
@@ -53,7 +54,8 @@
         { src: '{{{base}}}/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
         { src: '{{{base}}}/plugin/zoom-js/zoom.js', async: true },
         { src: '{{{base}}}/plugin/notes/notes.js', async: true },
-        { src: '{{{base}}}/plugin/math/math.js', async: true }
+        { src: '{{{base}}}/plugin/math/math.js', async: true },
+        { src: '{{{base}}}/rplugin/chalkboard/chalkboard.js', async: true }
       ];
 
       // default options to init reveal.js
@@ -63,7 +65,16 @@
         history: true,
         center: true,
         transition: 'default', // none/fade/slide/convex/concave/zoom
-        dependencies: deps
+        dependencies: deps,
+	keyboard: {
+	    67: function() { RevealChalkboard.toggleNotesCanvas() },	// toggle notes canvas when 'c' is pressed
+	    66: function() { RevealChalkboard.toggleChalkboard() },	// toggle chalkboard when 'b' is pressed
+	    46: function() { RevealChalkboard.clear() },	// clear chalkboard when 'DEL' is pressed
+	     8: function() { RevealChalkboard.reset() },	// reset chalkboard data on current slide when 'BACKSPACE' is pressed
+	    68: function() { RevealChalkboard.download() },	// downlad recorded chalkboard drawing when 'd' is pressed
+	    88: function() { RevealChalkboard.colorNext() },	// cycle colors forward when 'x' is pressed
+	    89: function() { RevealChalkboard.colorPrev() },	// cycle colors backward when 'y' is pressed
+	}
       };
 
       // options from URL query string

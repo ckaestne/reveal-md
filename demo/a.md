@@ -1,6 +1,8 @@
 Foo
 
-![cat](sub/cat.jpg)
+![cat](_img/cat.jpg)
+
+<img src="_img/cat2.jpg">
 
 Note: test note
 

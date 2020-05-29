@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{{base}}}{{{highlightThemeUrl}}}" />
     <link rel="stylesheet" href="{{{base}}}/css/print/{{#print}}pdf{{/print}}{{^print}}paper{{/print}}.css" type="text/css" media="print" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+     <script src="{{{base}}}/rplugin/spreadsheet/ruleJS.all.full.min.js"></script>
+   <link rel="stylesheet" href="{{{base}}}/rplugin/spreadsheet/spreadsheet.css">
     {{#cssPaths}}
     <link rel="stylesheet" href="{{{base}}}/{{{.}}}" />
     {{/cssPaths}}
@@ -55,6 +57,9 @@
         { src: '{{{base}}}/plugin/zoom-js/zoom.js', async: true },
         { src: '{{{base}}}/plugin/notes/notes.js', async: true },
         { src: '{{{base}}}/plugin/math/math.js', async: true },
+        { src: '{{{base}}}/rplugin/embed-tweet/embed-tweet.js' },
+        { src: '{{{base}}}/rplugin/menu/menu.js' },
+        { src: '{{{base}}}/rplugin/spreadsheet/spreadsheet.js' },
         { src: '{{{base}}}/rplugin/chalkboard/chalkboard.js', async: true }
       ];
 
@@ -66,6 +71,11 @@
         center: true,
         transition: 'default', // none/fade/slide/convex/concave/zoom
         dependencies: deps,
+	chalkboard: { // font-awesome.min.css must be available
+		src: "chalkboard/chalkboard.json",
+		toggleChalkboardButton: { left: "80px" },
+		toggleNotesButton: { left: "130px" },
+	},
 	keyboard: {
 	    67: function() { RevealChalkboard.toggleNotesCanvas() },	// toggle notes canvas when 'c' is pressed
 	    66: function() { RevealChalkboard.toggleChalkboard() },	// toggle chalkboard when 'b' is pressed

@@ -1,6 +1,6 @@
 # reveal-md
 
-[reveal.js](http://lab.hakim.se/reveal-js/#/) on steroids! Get beautiful reveal.js presentations from Markdown files.
+[reveal.js](https://revealjs.com) on steroids! Get beautiful reveal.js presentations from Markdown files.
 
 ## Installation
 
@@ -16,6 +16,11 @@ reveal-md path/to/my/slides.md
 
 This starts a local server and opens any Markdown file as a reveal.js presentation in the default browser.
 
+## Reveal.js v4
+
+Thanks to [hugo-vrijswijk](https://github.com/hugo-vrijswijk) we are now using
+[Reveal.js v4](https://github.com/hakimel/reveal.js/releases) in reveal-md v4!
+
 ## Docker
 
 You can use Docker to run this tool without needing Node.js installed on your machine. Run the public Docker image,
@@ -30,26 +35,34 @@ The service is now running at [http://localhost:1948](http://localhost:1948).
 
 ## Features
 
-- [Markdown](#markdown)
-- [Theme](#theme)
-- [Highlight Theme](#highlight-theme)
-- [Custom Slide Separators](#custom-slide-separators)
-- [Custom Slide Attributes](#custom-slide-attributes)
-- [reveal-md Options](#reveal-md-options)
-- [Reveal.js Options](#revealjs-options)
-- [Speaker Notes](#speaker-notes)
-- [YAML Front Matter](#yaml-front-matter)
-- [Live Reload](#live-reload)
-- [Custom Scripts](#custom-scripts)
-- [Custom CSS](#custom-css)
-- [Custom Favicon](#custom-favicon)
-- [Pre-process Markdown](#pre-process-markdown)
-- [Print to PDF](#print-to-pdf)
-- [Static Website](#static-website)
-- [Disable Auto-open Browser](#disable-auto-open-browser)
-- [Directory Listing](#directory-listing)
-- [Custom Port](#custom-port)
-- [Custom Template](#custom-template)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Reveal.js v4](#revealjs-v4)
+- [Docker](#docker)
+- [Features](#features)
+  - [Markdown](#markdown)
+  - [Theme](#theme)
+  - [Highlight Theme](#highlight-theme)
+  - [Custom Slide Separators](#custom-slide-separators)
+  - [Custom Slide Attributes](#custom-slide-attributes)
+  - [reveal-md Options](#reveal-md-options)
+  - [Reveal.js Options](#revealjs-options)
+  - [Speaker Notes](#speaker-notes)
+  - [YAML Front matter](#yaml-front-matter)
+  - [Live Reload](#live-reload)
+  - [Custom Scripts](#custom-scripts)
+  - [Custom CSS](#custom-css)
+  - [Custom Favicon](#custom-favicon)
+  - [Pre-process Markdown](#pre-process-markdown)
+  - [Print to PDF](#print-to-pdf)
+  - [Static Website](#static-website)
+  - [Disable Auto-open Browser](#disable-auto-open-browser)
+  - [Directory Listing](#directory-listing)
+  - [Custom Port](#custom-port)
+  - [Custom Template](#custom-template)
+- [Related Projects & Alternatives](#related-projects--alternatives)
+- [Thank You](#thank-you)
+- [License](#license)
 
 ### Markdown
 
@@ -79,7 +92,7 @@ Override theme (default: `black`):
 reveal-md slides.md --theme solarized
 ```
 
-See [available themes](https://github.com/hakimel/reveal.js/tree/master/css/theme).
+See [available themes](https://github.com/hakimel/reveal.js/tree/master/css/theme/source).
 
 Override reveal theme with a custom one. In this example, the file is at `./theme/my-custom.css`:
 
@@ -119,7 +132,7 @@ reveal-md slides.md --vertical-separator "^\n\n"
 
 ### Custom Slide Attributes
 
-Use the [reveal.js slide attributes](https://github.com/hakimel/reveal.js#slide-attributes) functionality to add HTML
+Use the [reveal.js slide attributes](https://revealjs.com/markdown/#slide-attributes) functionality to add HTML
 attributes, e.g. custom backgrounds. Alternatively, add an HTML `id` attribute to a specific slide and style it with
 CSS.
 
@@ -152,8 +165,8 @@ Markdown files. They'll be picked up automatically. Example:
 
 ### Reveal.js Options
 
-Define Reveal.js [options](https://github.com/hakimel/reveal.js#configuration) in a `reveal.json` file that must be
-located at the root directory of the Markdown files. They'll be picked up automatically. Example:
+Define Reveal.js [options](https://revealjs.com/config/) in a `reveal.json` file that must be located at the root
+directory of the Markdown files. They'll be picked up automatically. Example:
 
 ```json
 {
@@ -164,8 +177,7 @@ located at the root directory of the Markdown files. They'll be picked up automa
 
 ### Speaker Notes
 
-Use the [speaker notes](https://github.com/hakimel/reveal.js#speaker-notes) feature by using a line starting with
-`Note:`.
+Use the [speaker notes](https://revealjs.com/speaker-view/) feature by using a line starting with `Note:`.
 
 ### YAML Front matter
 
@@ -301,6 +313,13 @@ Providing a directory will result in a stand-alone overview page with links to t
 
 ```bash
 reveal-md dir/ --static
+```
+
+By default, all `*.md` files in all subdirectories are included in the generated website. Provide a custom
+[glob pattern](https://github.com/isaacs/node-glob) using `--glob` to generate slides only from matching files:
+
+```bash
+reveal-md dir/ --static --glob '**/slides.md'
 ```
 
 Additional `--absolute-url` and `--featured-slide` parameters could be used to generate [OpenGraph](http://ogp.me)

@@ -40,12 +40,12 @@
     "mustache": "4.0.0",
     "open": "7.0.2",
     "reveal.js": "3.9.2",
-    "reveal.js-plugins": "1.0.0",
     "serve-favicon": "2.5.0",
     "try-require": "1.2.1",
     "update-notifier": "4.1.0",
     "yaml-front-matter": "4.1.0",
-    "yargs-parser": "17.0.0"
+    "yargs-parser": "17.0.0",
+    "reveal.js-plugins": "github:ckaestne/reveal.js-plugins#master"
   },
   "optionalDependencies": {
     "puppeteer": "1.19.0"
